@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-md-12 mt-4">
       <div class="jumbotron bg-danger text-white text-center">
+        <img src="../assets/ng.png" alt="angular logo" class="angular-logo">
         <h1>{{ title }}</h1>
       </div>
     </div>
@@ -14,14 +15,13 @@
     <div class="col-md-12">
       <ngx-tabs>
         <ngx-tab tabTitle="People List">
-          <app-people-list [people]="people"></app-people-list>
+          <app-people-list [people]="people" (addPerson)="onAddPerson()"></app-people-list>
         </ngx-tab>
-        <ngx-tab tabTitle="Tab 2">Tab 2 Content</ngx-tab>
+        <ngx-tab tabTitle="Tab 2" [template]="personEdit" [dataContext]="people[0]"></ngx-tab>
       </ngx-tabs>
 
-      <ng-template #personEdit>
-        Hi, I am a static template defined within the template
-        of another component.
+      <ng-template #personEdit let-person="data">
+        Hi, I am {{ person?.name }} 😃!
       </ng-template>
 
     </div>

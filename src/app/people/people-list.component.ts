@@ -15,7 +15,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
           <td>{{ p.name }}</td>
           <td>{{ p.surname }}</td>
           <td><a href="https://twitter.com/{{ p.twitter }}" target="_blank">{{ p.twitter }}</a></td>
-          <td><button class="btn btn-sm btn-dark" (click)="editPerson.emit(p)">Edit</button></td>
+          <td>
+            <button class="btn btn-sm btn-dark" (click)="editPerson.emit(p)">
+              <i class="fa fa-edit" aria-hidden="true"> </i> Edit
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

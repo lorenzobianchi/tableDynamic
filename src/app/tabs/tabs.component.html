@@ -1,7 +1,11 @@
 <ul class="nav nav-tabs">
-  <li *ngFor="let tab of tabs" (click)="selectTab(tab)" class="nav-item" [class.active]="tab.active">
-    <a class="nav-link" href="#">{{tab.tabTitle}}</a>
+  <li *ngFor="let tab of tabs" (click)="selectTab(tab)" class="nav-item">
+    <a class="nav-link" [class.active]="tab.active" href="#">{{tab.tabTitle}}</a>
+  </li>
+  <li *ngFor="let tab of dynamicTabs" (click)="selectTab(tab)" class="nav-item">
+    <a class="nav-link" [class.active]="tab.active" href="#">{{tab.tabTitle}}</a>
   </li>
 </ul>
 
 <ng-content></ng-content>
+<ng-template appDynamicTabAnchor #container></ng-template>
