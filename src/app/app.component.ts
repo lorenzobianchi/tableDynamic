@@ -31,12 +31,40 @@ export class AppComponent implements OnInit, AfterViewInit {
     console.log(this.personEditTemplete)
   }
 
-  onAddPerson() {
-    console.log('yo')
+  onEditPerson(person) {
     this.tabsComponent.openTab(
-      'Dynamic Tabs',
+      `Editing ${person.name}`,
       this.personEditTemplete,
-      this.people[0]
+      person,
+      true
+    )
+  }
+
+  onAddPerson() {
+    this.tabsComponent.openTab(
+      'New Person',
+      this.personEditTemplete,
+      {},
+      true
     );
   }
+
+  onPersonFormSubmit(dataModel) {
+    if (dataModel.id > 0) {
+      this.people = this.people.map(person => {
+        if (person.id === dataModel.id) {
+          return dataModel;
+        } else {
+          return person;
+        }
+      });
+    } else {
+      // create a new one
+      dataModel.id = Math.round(Math.random() * 100);
+      this.people.push(dataModel);
+    }
+
+    this.tabsComponent.closeActiveTab();
+  }
+
 }

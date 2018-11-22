@@ -3,7 +3,9 @@
     <a class="nav-link" [class.active]="tab.active" href="#">{{tab.tabTitle}}</a>
   </li>
   <li *ngFor="let tab of dynamicTabs" (click)="selectTab(tab)" class="nav-item">
-    <a class="nav-link" [class.active]="tab.active" href="#">{{tab.tabTitle}}</a>
+    <a class="nav-link" [class.active]="tab.active" href="#">
+      {{tab.tabTitle}} <span class="tab-close" *ngIf="tab.isCloseable" (click)="closeTab(tab)">x</span>
+    </a>
   </li>
 </ul>
 

@@ -26,4 +26,5 @@ export class TabComponent {
   @Input() active = false;
   @Input() template;
   @Input() dataContext;
+  @Input() isCloseable = false;
 }

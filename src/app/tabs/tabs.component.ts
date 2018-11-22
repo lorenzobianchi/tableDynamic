@@ -23,7 +23,7 @@ export class TabsComponent implements AfterContentInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
 
-  openTab(title: string, template, data) {
+  openTab(title: string, template, data, isCloseable = false) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       TabComponent
     );
@@ -35,6 +35,7 @@ export class TabsComponent implements AfterContentInit {
     instance.tabTitle = title;
     instance.template = template;
     instance.dataContext = data;
+    instance.isCloseable = isCloseable;
 
     this.dynamicTabs.push(instance);
 
@@ -59,5 +60,25 @@ export class TabsComponent implements AfterContentInit {
     tab.active = true;
   }
 
+  closeTab(tab: TabComponent) {
+    for(let i=0; i<this.dynamicTabs.length; i++) {
+      if(this.dynamicTabs[i] === tab) {
+        this.dynamicTabs.splice(i, 1);
+
+        const viewContainerRef = this.dynamicTabPlaceholder.viewContainer;
+        viewContainerRef.remove(i);
+
+        this.selectTab(this.tabs.first);
+        break;
+      }
+    }
+  }
+
+  closeActiveTab() {
+    let activeTab = this.dynamicTabs.filter(t => t.active);
+    if(activeTab.length > 0) {
+      this.closeTab(activeTab[0]);
+    }
+  }
 
 }

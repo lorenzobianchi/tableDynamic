@@ -15,13 +15,18 @@
     <div class="col-md-12">
       <ngx-tabs>
         <ngx-tab tabTitle="People List">
-          <app-people-list [people]="people" (addPerson)="onAddPerson()"></app-people-list>
+          <app-people-list
+            [people]="people"
+            (addPerson)="onAddPerson()"
+            (editPerson)="onEditPerson($event)">
+          </app-people-list>
         </ngx-tab>
         <ngx-tab tabTitle="Tab 2" [template]="personEdit" [dataContext]="people[0]"></ngx-tab>
       </ngx-tabs>
 
       <ng-template #personEdit let-person="data">
-        Hi, I am {{ person?.name }} 😃!
+        <app-person-edit [person]="person" (savePerson)="onPersonFormSubmit($event)"></app-person-edit>
+        <!-- Hi, I am {{ person?.name }} 😃! -->
       </ng-template>
 
     </div>
