@@ -6,8 +6,20 @@
         <img src="../assets/ng.png" alt="angular logo" class="angular-logo">
         <h1>{{ title }}</h1>
         <!-- <app-tooltip text="this is a placehoder" position="bottom"></app-tooltip> -->
-        <app-popper></app-popper>
+        <!-- <app-popper></app-popper> -->
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <input type="file" #fileupload>
+      <button (click)="uploadAvatar(fileupload)">Upload</button>
+      <p *ngIf="output">
+        {{ output }}
+      </p>
     </div>
   </div>
 </div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row mt-6">
+    <div class="col-md-6">
+      <div *ngFor="let p of pets$">
+        {{p.name}}
+      </div>
+      <p *ngIf="message" class="text-warning">{{message}}</p>
+      <p *ngIf="message2" class="text-danger">{{message2}}</p>
+      <p *ngIf="petTxt" class="text-info">{{petTxt}}</p>
+    </div>
+    <div class="col-md-6">
+      <div class="d-flex flex-column">
+        <button (click)="getPets()" name="button" class="btn btn-info m-r-auto">get pets</button>
+        <button (click)="addPet()" name="button" class="btn btn-primary mt-2 m-r-auto">add pets</button>
+        <button (click)="getUnavailable()" name="button" class="btn btn-danger mt-2 m-r-auto">unavailable pets</button>
+        <button (click)="fetchPetsHeaders()" name="button" class="btn btn-warning mt-2 m-r-auto">get pets headers</button>
+        <button (click)="getPetsTxt()" name="button" class="btn btn-dark mt-2 m-r-auto">get pets txt</button>
+      </div>
+    </div>
+  </div>
+</div>

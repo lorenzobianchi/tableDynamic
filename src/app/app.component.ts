@@ -6,7 +6,10 @@ import {
 } from '@angular/core';
 
 import { PeopleService } from './people/people.service';
+import { UploadService } from './upload.service';
 import { TabsComponent } from './tabs/tabs.component';
+
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +21,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('personEdit') personEditTemplete;
   @ViewChild(TabsComponent) tabsComponent;
   people;
-
-  constructor(private peopleService: PeopleService) {}
+  output;
+  constructor(
+    private peopleService: PeopleService,
+    private uploadService: UploadService
+  ) {}
 
   ngOnInit() {
     this.peopleService.getPeople().subscribe(
@@ -67,4 +73,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.tabsComponent.closeActiveTab();
   }
 
+  uploadAvatar(fileupload) {
+    const formData = new FormData();
+    formData.append('avatar', fileupload[0])
+
+    this.uploadService
+      .uploadAvatar(formData)
+      .subscribe(res => {
+        if (res.type === HttpEventType.UploadProgress) {
+          const percentage = Math.round(100 * res.loaded / res.total)
+          this.output = `File is ${percentage}% uploaded!`;
+        } else if (res instanceof HttpResponse) {
+          this.output = 'The file is completely uploaded!'
+        }
+      })
+  }
 }
