@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsModule } from './tabs/tabs.module';
@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PopperComponent } from './popper/popper.component';
 import { PetsModule } from './pets/pets.module';
 import { UploadService } from './upload.service';
+import { MyLogHttpInterceptor } from './http.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { UploadService } from './upload.service';
     HttpClientModule,
     PetsModule,
   ],
-  providers: [UploadService],
+  providers: [
+    UploadService,
+    { provide: HTTP_INTERCEPTORS, useClass: MyLogHttpInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
